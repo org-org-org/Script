@@ -43,9 +43,10 @@ int main() {
         start = Now();
         int i = 0;
         while (i < inputNum) {
-            if (pressing(endKey)) { // 按F9中途结束
+            if (pressing(endKey)) { // 按F9直接结束本次
                 clearPressingState();
-                return 0;
+                T--;
+                break;
             }
             curTime = Now() - start;
             while (i < inputNum && curTime >= inputTime[i]) {
