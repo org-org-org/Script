@@ -1,23 +1,7 @@
 #include "myhead.h"
-vector<BYTE>vKeys;
 bool pre[256] = {0};
 POINT point, prePoint;
 int pressEsc = 0;
-void loadAllKeys() {
-    vKeys = vector<BYTE>{1, 2, 4, 8, 9, 13, 16, 17, 18, 20, 27, 44, 46, 192};
-    for (int i = 32; i <= 40; i++) {
-        vKeys.push_back(i);
-    }
-    for (int i = 48; i <= 92; i++) { // 0~9 + A~Z
-        vKeys.push_back(i);
-    }
-    for (int i = 112; i <= 123; i++) { // F1~F12
-        vKeys.push_back(i);
-    }
-    // for (int i = 96; i <= 111; i++) { // 小键盘
-    //     vKeys.push_back(i);
-    // }
-}
 void pressDownEvent(int vKey) {
     pre[vKey] = 1;
     inputTime[inputNum] = curTime;
@@ -43,6 +27,9 @@ void mouseMoveEvent() {
     }
 }
 void check(int vKey) {
+    if (vKey == beginKey || vKey == endKey) {
+        return;
+    }
     if (pressing(vKey)) {
         if (pre[vKey] == 0) { // 之前没按着现在按着，按下
             pressDownEvent(vKey);
@@ -61,6 +48,7 @@ void save() {
     fclose(fp);
 }
 void init() {
+    loadAllKeys();
     cout << "input a filename to save\n";
     cin >> fileName;
     fileName = LOAD_DIR + fileName + ".txt";
@@ -71,8 +59,7 @@ void init() {
     cout << "whether to quick click Esc to pause game at first?\n";
     cin >> pressEsc;
     cout << "then press F8 to start recording and press F9 to stop\n";
-    loadAllKeys();
-    while (!pressing(VK_F8)) { // 按F8开始录制
+    while (!pressing(beginKey)) { // 按F8开始录制
         Sleep(SLEEP_DURATION);
     }
     start = Now();
@@ -94,7 +81,7 @@ void quickClickEsc() {
 }
 int main() {
     init();
-    while (!pressing(VK_F9)) { // 按F9停止录制
+    while (!pressing(endKey)) { // 按F9停止录制
         curTime = Now() - start;
         quickClickEsc();
         for (auto v : vKeys) { // 循环监听所有按键

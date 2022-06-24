@@ -1,5 +1,6 @@
 #include "myhead.h"
 void init() {
+    loadAllKeys();
     cout << "input a filename to read\n";
     cin >> fileName;
     FILE* fp;
@@ -12,7 +13,7 @@ void init() {
         inputNum++;
     }
     fclose(fp);
-    while (!pressing(VK_F8)) { // 按F8开始执行
+    while (!pressing(beginKey)) { // 按F8开始执行
         Sleep(SLEEP_DURATION);
     }
     start = Now();
@@ -21,8 +22,9 @@ int main() {
     init();
     int i = 0;
     while (i < inputNum) {
-        if (pressing(VK_F9)) { // 按F9中途结束
-            break;
+        if (pressing(endKey)) { // 按F9中途结束
+            clearPressingState();
+            return 0;
         }
         curTime = Now() - start;
         while (i < inputNum && curTime >= inputTime[i]) {

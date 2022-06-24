@@ -2,6 +2,7 @@
 int ROUND_DURATION = 0;
 int ROUND = 1;
 void init() {
+    loadAllKeys();
     cout << "input a filename to read\n";
     cin >> fileName;
     FILE* fp;
@@ -24,8 +25,8 @@ int waitToStart(int T) {
     if (ROUND_DURATION && T) {
         Sleep(ROUND_DURATION * 1000);
     } else {
-        while (!pressing(VK_F8)) { // 按F8开始执行
-            if (pressing(VK_F9)) { // 按F9中途结束
+        while (!pressing(beginKey)) { // 按F8开始执行
+            if (pressing(endKey)) { // 按F9中途结束
                 return 0;
             }
             Sleep(SLEEP_DURATION);
@@ -42,7 +43,8 @@ int main() {
         start = Now();
         int i = 0;
         while (i < inputNum) {
-            if (pressing(VK_F9)) { // 按F9中途结束
+            if (pressing(endKey)) { // 按F9中途结束
+                clearPressingState();
                 return 0;
             }
             curTime = Now() - start;
