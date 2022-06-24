@@ -1,7 +1,7 @@
 #include "myhead.h"
 bool pre[256] = {0};
 POINT point, prePoint;
-int pressEsc = 0;
+int pressEsc = 3;
 void pressDownEvent(int vKey) {
     pre[vKey] = 1;
     inputTime[inputNum] = curTime;
@@ -57,6 +57,7 @@ void init() {
         cout << fileName << endl;
     }
     cout << "whether to quick click Esc to pause game at first?\n";
+    cout << "input 0 or 1\n";
     cin >> pressEsc;
     cout << "then press F8 to start recording and press F9 to stop\n";
     while (!pressing(beginKey)) { // 按F8开始录制
@@ -67,14 +68,14 @@ void init() {
     mouseMoveEvent(); // 设置鼠标初始位置
 }
 void quickClickEsc() {
-    if (pressEsc && pressing(VK_ESCAPE)) {
-        while (!pressing(192)) {
-            curTime = Now() - start;
+    if (pressEsc && curTime > 3000) {
+        while (!pressing(192) && curTime < 5000) {
             pressDownEvent(VK_ESCAPE);
             Sleep(SLEEP_DURATION);
             curTime = Now() - start;
             pressUpEvent(VK_ESCAPE);
             Sleep(SLEEP_DURATION);
+            curTime = Now() - start;
         }
         pressEsc = 0;
     }
