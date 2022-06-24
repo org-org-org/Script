@@ -7,7 +7,7 @@
         // "cpp": "cd $dir && g++ *.cpp -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
         "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
         // "cpp": "cd $dir && g++ $fileName -lEasyX -lgdi32 -lole32 -o $fileNameWithoutExt && $dir$fileNameWithoutExt"
-        "cpp": "g++ $fileName -o ..\\$fileNameWithoutExt && ..\\$fileNameWithoutExt"
+        "cpp": "g++ $fileName -o $fileNameWithoutExt && $fileNameWithoutExt"
     },
     "files.associations": {
         "*.tcc": "cpp",
