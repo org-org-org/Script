@@ -2,6 +2,7 @@
 vector<BYTE>vKeys;
 bool pre[256] = {0};
 POINT point, prePoint;
+int pressEsc = 0;
 void loadAllKeys() {
     vKeys = vector<BYTE>{1, 2, 4, 8, 9, 13, 16, 17, 18, 20, 27, 44, 46, 192};
     for (int i = 32; i <= 40; i++) {
@@ -67,25 +68,41 @@ void init() {
     if (fp == NULL) {
         cout << fileName << endl;
     }
+    cout << "whether to quick click Esc to pause game at first?\n";
+    cin >> pressEsc;
     cout << "then press F8 to start recording and press F9 to stop\n";
     loadAllKeys();
     while (!pressing(VK_F8)) { // 按F8开始录制
-        Sleep(1);
+        Sleep(SLEEP_DURATION);
     }
     start = Now();
     prePoint.x = 0x3f3f3f3f;
     mouseMoveEvent(); // 设置鼠标初始位置
 }
+void quickClickEsc() {
+    if (pressEsc && pressing(VK_ESCAPE)) {
+        while (!pressing(192)) {
+            curTime = Now() - start;
+            pressDownEvent(VK_ESCAPE);
+            Sleep(SLEEP_DURATION);
+            curTime = Now() - start;
+            pressUpEvent(VK_ESCAPE);
+            Sleep(SLEEP_DURATION);
+        }
+        pressEsc = 0;
+    }
+}
 int main() {
     init();
     while (!pressing(VK_F9)) { // 按F9停止录制
         curTime = Now() - start;
+        quickClickEsc();
         for (auto v : vKeys) { // 循环监听所有按键
             check(v);
         }
         imitateChange();
         mouseMoveEvent();
-        Sleep(1);
+        Sleep(SLEEP_DURATION);
     }
     save();
     return 0;

@@ -20,19 +20,25 @@ void init() {
     }
     fclose(fp);
 }
-void waitToStart(int T) {
+int waitToStart(int T) {
     if (ROUND_DURATION && T) {
         Sleep(ROUND_DURATION * 1000);
     } else {
         while (!pressing(VK_F8)) { // 按F8开始执行
+            if (pressing(VK_F9)) { // 按F9中途结束
+                return 0;
+            }
             Sleep(SLEEP_DURATION);
         }
     }
+    return 1;
 }
 int main() {
     init();
     for (int T = 0; T < ROUND; T++) {
-        waitToStart(T);
+        if (waitToStart(T) == 0) {
+            return 0;
+        }
         start = Now();
         int i = 0;
         while (i < inputNum) {
