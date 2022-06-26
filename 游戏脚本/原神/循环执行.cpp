@@ -1,7 +1,10 @@
-#include "myhead.h"
-int ROUND_DURATION = 0;
-int ROUND = 1;
+#include "../../common/sync_implement.h"
 void init() {
+    cout << "whether start a new round manually or sleep?\n";
+    cout << "input 0 or N, 0 means manually and N means sleep N second\n";
+    cin >> ROUND_DURATION;
+    cout << "input the loop times\n";
+    cin >> ROUND;
     loadAllKeys();
     cout << "input a filename to read\n";
     cin >> fileName;
@@ -10,29 +13,16 @@ void init() {
         cout << "wrong filename, please input again\n";
         cin >> fileName;
     }
-    cout << "whether start a new round manually or sleep?\n";
-    cout << "input 0 or N, 0 means manually and N means sleep N second\n";
-    cin >> ROUND_DURATION;
-    cout << "input the loop times\n";
-    cin >> ROUND;
     cout << "then press F8 to implement and press F9 to stop\n";
-    while (~fscanf(fp, "%d%d%d", &inputTime[inputNum], &inputKey[inputNum], &inputType[inputNum])) {
-        inputNum++;
+    fscanf(fp, "%d", &inputNum);
+    for (int i = 0; i < inputNum; i++) {
+        fscanf(fp, "%d%d%d", &inputTime[i], &inputKey[i], &inputType[i]);
+    }
+    fscanf(fp, "%d", &syncCnt);
+    for (int i = 0; i < syncCnt; i++) {
+        fscanf(fp, "%d", &syncImitate[i]);
     }
     fclose(fp);
-}
-int waitToStart(int T) {
-    if (ROUND_DURATION && T) {
-        Sleep(ROUND_DURATION * 1000);
-    } else {
-        while (!pressing(beginKey)) { // 按F8开始执行
-            if (pressing(endKey)) { // 按F9中途结束
-                return 0;
-            }
-            Sleep(SLEEP_DURATION);
-        }
-    }
-    return 1;
 }
 int main() {
     init();
@@ -41,6 +31,7 @@ int main() {
             return 0;
         }
         start = Now();
+        syncFlag = 0;
         int i = 0;
         while (i < inputNum) {
             if (pressing(endKey)) { // 按F9直接结束本次
@@ -59,7 +50,7 @@ int main() {
                 }
                 i++;
             }
-            imitateChange();
+            syncImitateChange();
             Sleep(SLEEP_DURATION);
         }
     }

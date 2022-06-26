@@ -1,11 +1,11 @@
 #include "../../common/common_record.h"
 int pressEsc = 0;
 void init() {
-    cout << "whether to quick click Esc to pause game at first? [0/1]\n";
+    cout << "whether to quick hit Esc to pause game at first? [0/1]\n";
     cin >> pressEsc;
     initRecord();
 }
-void quickClickEsc() {
+void quickHitEsc() {
     if (pressEsc && curTime > 3200) {
         while (curTime < 5400) {
             keybd_event(VK_ESCAPE, 0, 0, 0);
@@ -25,7 +25,7 @@ int main() {
     init();
     while (!pressing(endKey)) { // 按F9停止录制
         curTime = Now() - start;
-        quickClickEsc();
+        quickHitEsc();
         for (auto v : vKeys) { // 循环监听所有按键
             check(v);
         }

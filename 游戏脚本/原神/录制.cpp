@@ -4,7 +4,7 @@ int syncCnt = 0;
 void init() {
     initRecord();
 }
-int imitateChange() {
+void recordImitateChange() {
     // PgUp, PgDn模拟滚轮
     if (pressing(VK_PRIOR)) {
         mouse_event(MOUSEEVENTF_WHEEL, 0, 0, MOUSE_SPEED, 0);
@@ -26,9 +26,11 @@ int imitateChange() {
         flag = 1;
         mouse_event(MOUSEEVENTF_MOVE, 0, MOUSE_SPEED, 0, 0);
     }
-    return flag;
+    if (flag) {
+        syncImitate[syncCnt++] = curTime;
+    }
 }
-void save() {
+void syncSaveRecord() {
     FILE* fp = fopen(fileName.c_str(), "w");
     fprintf(fp, "%d\n", inputNum);
     for (int i = 0; i < inputNum; i++) {
@@ -40,7 +42,7 @@ void save() {
         if (i % 10 == 0) {
             fprintf(fp, "\n");
         }
-        fprintf(fp, "%d ", syncCnt);
+        fprintf(fp, "%d ", syncImitate[i]);
     }
     fclose(fp);
 }
@@ -51,12 +53,10 @@ int main() {
         for (auto v : vKeys) { // 循环监听所有按键
             check(v);
         }
-        if (imitateChange()) {
-            syncImitate[syncCnt++] = curTime;
-        }
         mouseMoveEvent();
+        recordImitateChange();
         Sleep(SLEEP_DURATION);
     }
-    save();
+    syncSaveRecord();
     return 0;
 }
