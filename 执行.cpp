@@ -1,9 +1,6 @@
-#include "../../common/common_implement.h"
-void init() {
-    initImplement();
-}
+#include "./common/common_implement.h"
 int main() {
-    init();
+    initImplement();
     int i = 0;
     while (i < inputNum) {
         if (pressing(endKey)) { // 按F9中途结束
