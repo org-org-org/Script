@@ -60,6 +60,6 @@ void initRecord() {
     }
     printf("\a");
     start = Now();
-    prePoint.x = 0x3f3f3f3f;
+    prePoint.x = INF;
     mouseMoveEvent(); // 设置鼠标初始位置
 }
