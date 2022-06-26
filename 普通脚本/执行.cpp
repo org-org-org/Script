@@ -1,4 +1,4 @@
-#include "myhead.h"
+#include "common_implement.h"
 void init() {
     loadAllKeys();
     cout << "input a filename to read\n";
@@ -37,7 +37,6 @@ int main() {
             }
             i++;
         }
-        imitateChange();
         Sleep(SLEEP_DURATION);
     }
     return 0;

@@ -1,6 +1,4 @@
-#include "myhead.h"
-int ROUND_DURATION = 0;
-int ROUND = 1;
+#include "common_implement.h"
 void init() {
     loadAllKeys();
     cout << "input a filename to read\n";
@@ -20,19 +18,6 @@ void init() {
         inputNum++;
     }
     fclose(fp);
-}
-int waitToStart(int T) {
-    if (ROUND_DURATION && T) {
-        Sleep(ROUND_DURATION * 1000);
-    } else {
-        while (!pressing(beginKey)) { // 按F8开始执行
-            if (pressing(endKey)) { // 按F9中途结束
-                return 0;
-            }
-            Sleep(SLEEP_DURATION);
-        }
-    }
-    return 1;
 }
 int main() {
     init();
@@ -59,7 +44,6 @@ int main() {
                 }
                 i++;
             }
-            imitateChange();
             Sleep(SLEEP_DURATION);
         }
     }
