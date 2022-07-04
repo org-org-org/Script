@@ -50,10 +50,6 @@ void initRecord() {
     cout << "input a filename to save\n";
     cin >> fileName;
     fileName = LOAD_DIR + fileName + ".txt";
-    FILE* fp = fopen(fileName.c_str(), "w");
-    if (fp == NULL) {
-        cout << fileName << endl;
-    }
     cout << "then press F8 to start recording and press F9 to stop\n";
     while (!pressing(beginKey)) { // 按F8开始录制
         Sleep(SLEEP_DURATION);

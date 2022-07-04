@@ -23,6 +23,12 @@ void pressUp(int key) {
         keybd_event(key, 0, 2, 0);
     }
 }
+void press(int key) {
+    pressDown(key);
+    Sleep(8 * SLEEP_DURATION);
+    pressUp(key);
+    Sleep(8 * SLEEP_DURATION);
+}
 void mouseMove(int i) {
     SetCursorPos(-inputKey[i], -inputType[i]);
 }

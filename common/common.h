@@ -17,10 +17,6 @@ string fileName;
 BYTE beginKey = VK_F8, endKey = VK_F9;
 vector<BYTE>vKeys;
 bool pre[256] = {0};
-void press(BYTE vKey) {
-    keybd_event(vKey, 0, 0, 0);
-    keybd_event(vKey, 0, 2, 0);
-}
 bool pressing(int vKey) {
     return GetAsyncKeyState(vKey) >> 15;
 }
@@ -43,7 +39,7 @@ void loadAllKeys() {
         vKeys.push_back(i);
     }
     // for (int i = 96; i <= 111; i++) { // 小键盘
-    //     vKeys.push_back(i);
+    //  vKeys.push_back(i);
     // }
 }
 void clearPressingState() {
