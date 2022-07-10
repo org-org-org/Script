@@ -6,7 +6,7 @@
 #include <dirent.h>
 #define INF 0x3f3f3f3f
 using namespace std;
-const int N = 1 << 18;
+const int N = 1 << 16;
 const int MOUSE_SPEED = 32;
 const int SLEEP_DURATION = 10;
 const string LOAD_DIR = "./input/";

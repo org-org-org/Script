@@ -26,8 +26,8 @@ int main() {
     while (!pressing(endKey)) { // 按F9停止录制
         curTime = Now() - start;
         quickHitEsc();
-        for (auto v : vKeys) { // 循环监听所有按键
-            check(v);
+        for (int i = 0; i < vKeys.size(); i++) { // 循环监听所有按键
+            check(vKeys[i]);
         }
         mouseMoveEvent();
         Sleep(SLEEP_DURATION);
