@@ -11,22 +11,8 @@ void recordImitateChange() {
     } else if (pressing(VK_NEXT)) {
         mouse_event(MOUSEEVENTF_WHEEL, 0, 0, -MOUSE_SPEED, 0);
     }
-    int flag = 0;
-    // 小键盘模拟视角变换
-    if (pressing(VK_LEFT)) {
-        flag = 1;
-        mouse_event(MOUSEEVENTF_MOVE, -MOUSE_SPEED, 0, 0, 0);
-    } else if (pressing(VK_RIGHT)) {
-        flag = 1;
-        mouse_event(MOUSEEVENTF_MOVE, MOUSE_SPEED, 0, 0, 0);
-    } else if (pressing(VK_UP)) {
-        flag = 1;
-        mouse_event(MOUSEEVENTF_MOVE, 0, -MOUSE_SPEED, 0, 0);
-    } else if (pressing(VK_DOWN)) {
-        flag = 1;
-        mouse_event(MOUSEEVENTF_MOVE, 0, MOUSE_SPEED, 0, 0);
-    }
-    if (flag) {
+    curTime = Now() - start;
+    if (imitateChange()) {
         syncImitate[syncCnt++] = curTime;
     }
 }

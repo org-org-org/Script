@@ -47,3 +47,21 @@ void clearPressingState() {
         keybd_event(v, 0, 2, 0);
     }
 }
+int imitateChange() {
+    int flag = 0;
+    // 方向键模拟视角变换
+    if (pressing(VK_LEFT)) {
+        flag = 1;
+        mouse_event(MOUSEEVENTF_MOVE, -MOUSE_SPEED, 0, 0, 0);
+    } else if (pressing(VK_RIGHT)) {
+        flag = 1;
+        mouse_event(MOUSEEVENTF_MOVE, MOUSE_SPEED, 0, 0, 0);
+    } else if (pressing(VK_UP)) {
+        flag = 1;
+        mouse_event(MOUSEEVENTF_MOVE, 0, -MOUSE_SPEED, 0, 0);
+    } else if (pressing(VK_DOWN)) {
+        flag = 1;
+        mouse_event(MOUSEEVENTF_MOVE, 0, MOUSE_SPEED, 0, 0);
+    }
+    return flag;
+}
