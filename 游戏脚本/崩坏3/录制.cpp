@@ -24,6 +24,7 @@ void quickHitEsc() {
 int main() {
     init();
     while (!pressing(endKey)) { // 按F9停止录制
+        pauseEvent();
         curTime = Now() - start;
         quickHitEsc();
         for (int i = 0; i < vKeys.size(); i++) { // 循环监听所有按键

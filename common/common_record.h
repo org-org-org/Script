@@ -25,7 +25,7 @@ void mouseMoveEvent() {
     }
 }
 void check(int vKey) {
-    if (vKey == beginKey || vKey == endKey) {
+    if (vKey == beginKey || vKey == endKey || vKey == pauseKey) {
         return;
     }
     if (pressing(vKey)) {
@@ -58,4 +58,15 @@ void initRecord() {
     start = Now();
     prePoint.x = INF;
     mouseMoveEvent(); // 设置鼠标初始位置
+}
+void pauseEvent() {
+    if (pressing(pauseKey)) {
+        printf("\a");
+        time_t p = Now();
+        while (!pressing(beginKey)) { // 按F8重新开始
+            Sleep(SLEEP_DURATION);
+        }
+        printf("\a");
+        start += Now() - p;
+    }
 }

@@ -14,7 +14,7 @@ int inputTime[N] = {0}, inputKey[N] = {0}, inputType[N] = {0};
 int inputNum = 0;
 time_t start = 0, curTime = 0;
 string fileName;
-BYTE beginKey = VK_F8, endKey = VK_F9;
+BYTE beginKey = VK_F8, endKey = VK_F9, pauseKey = VK_F7;
 vector<BYTE>vKeys;
 bool pre[256] = {0};
 bool pressing(int vKey) {
@@ -42,9 +42,31 @@ void loadAllKeys() {
     //  vKeys.push_back(i);
     // }
 }
+void pressDown(int key) {
+    if (key == 1) {
+        mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0); // 鼠标左键按下 
+    } else if (key == 2) {
+        mouse_event(MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, 0);
+    } else if (key == 4) {
+        mouse_event(MOUSEEVENTF_MIDDLEDOWN, 0, 0, 0, 0);
+    } else {
+        keybd_event(key, 0, 0, 0);
+    }
+}
+void pressUp(int key) {
+    if (key == 1) {
+        mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+    } else if (key == 2) {
+        mouse_event(MOUSEEVENTF_RIGHTUP, 0, 0, 0, 0);
+    } else if (key == 4) {
+        mouse_event(MOUSEEVENTF_MIDDLEUP, 0, 0, 0, 0);
+    } else {
+        keybd_event(key, 0, 2, 0);
+    }
+}
 void clearPressingState() {
     for (auto v : vKeys) {
-        keybd_event(v, 0, 2, 0);
+        pressUp(v);
     }
 }
 int imitateChange() {
