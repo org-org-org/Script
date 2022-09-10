@@ -85,3 +85,13 @@ void initLoopImplement() {
     }
     fclose(fp);
 }
+void pressKey(BYTE vKey) {
+    static char cnt[256] = {0};
+    if (cnt[vKey] == 4) {
+        pressDown(vKey);
+    } else if (cnt[vKey] == 8) {
+        pressUp(vKey);
+        cnt[vKey] = 0;
+    }
+    cnt[vKey]++;
+}

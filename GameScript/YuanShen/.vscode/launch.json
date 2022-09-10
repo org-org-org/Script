@@ -11,8 +11,8 @@
             "program": "C:\\Windows\\system32\\cmd",
             "args": [
                 "/C",
-                // "${fileDirname}\\${fileBasenameNoExtension}.exe",
-                "${fileDirname}\\bin\\${fileBasenameNoExtension}.exe",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                // "${fileDirname}\\bin\\${fileBasenameNoExtension}.exe",
             ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -25,8 +25,8 @@
             "name": "Debug", // 配置名称
             "type": "cppdbg", // 配置类型，cppdbg对应cpptools提供的调试功能；可以认为此处只能是cppdbg
             "request": "launch", // 请求配置类型，可以为launch（启动）或attach（附加）
-            // "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
-            "program": "${fileDirname}\\bin\\${fileBasenameNoExtension}.exe", // 将要进行调试的程序的路径
+            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+            // "program": "${fileDirname}\\bin\\${fileBasenameNoExtension}.exe", // 将要进行调试的程序的路径
             "args": [], // 程序调试时传递给程序的命令行参数，这里设为空即可
             "stopAtEntry": false, // 设为true时程序将暂停在程序入口处，相当于在main上打断点
             "cwd": "${fileDirname}", // 调试程序时的工作目录，此处为源码文件所在目录
