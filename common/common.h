@@ -38,9 +38,9 @@ void loadAllKeys() {
     for (int i = 112; i <= 123; i++) { // F1~F12
         vKeys.push_back(i);
     }
-    // for (int i = 96; i <= 111; i++) { // 小键盘
-    //  vKeys.push_back(i);
-    // }
+    for (int i = 96; i <= 111; i++) { // 小键盘
+        vKeys.push_back(i);
+    }
 }
 void pressDown(int key) {
     if (key == 1) {
@@ -86,4 +86,15 @@ int imitateChange() {
         mouse_event(MOUSEEVENTF_MOVE, 0, MOUSE_SPEED, 0, 0);
     }
     return flag;
+}
+void pause(vector<int>endKeys) {
+    clearPressingState();
+    while (1) {
+        Sleep(SLEEP_DURATION);
+        for (int i = 0; i < endKeys.size(); i++) {
+            if (pressing(endKeys[i])) {
+                return;
+            }
+        }
+    }
 }

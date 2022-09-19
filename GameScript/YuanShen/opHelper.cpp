@@ -1,97 +1,36 @@
 #include "../../common/sync_implement.h"
-// int state[256] = {0};
-// bool doublePress(int vKey) {
-//     if (GetAsyncKeyState(vKey)) {
-//         if (pre[vKey] == 0) { // 之前没按着现在按着，按下
-//             pre[vKey] = 1;
-//             state[vKey]++;
-//         }
-//     } else {
-//         if (pre[vKey] == 1) { // 之前按着现在没按着，松开
-//             pre[vKey] = 0;
-//             state[vKey]++;
-//         } else {
-//             state[vKey] = 0;
-//         }
-//     }
-//     return state[vKey] == 4;
-// }
-int pauseEvent() {
+const string TXT_DIR = "D:/0_vscode_cpp/Script/GameScript/YuanShen/input/";
+void pauseEvent() {
     if (pressing(VK_F7) || pressing(VK_MENU) && pressing(VK_TAB)) {
-        clearPressingState();
-        while (!pressing(VK_F6)) {
-            if (pressing(VK_F4)) {
-                return 0;
-            }
-            Sleep(SLEEP_DURATION);
-        }
+        pause({VK_F6, VK_F4});
     }
     if (pressing('M') || pressing('B') || pressing('C') || pressing('L') || pressing(VK_RETURN)) {
-        clearPressingState();
-        while (!pressing(VK_ESCAPE) && !pressing(VK_F6)) {
-            if (pressing(VK_F4)) {
-                return 0;
-            }
-            Sleep(SLEEP_DURATION);
-        }
+        pause({VK_ESCAPE, VK_F6, VK_F4});
     }
-    return 1;
 }
 void selfEvent() {
-    if (pressing('H')) {
-        start = Now();
-        int i = 0;
-        while (i < inputNum) {
-            if (pressing(endKey)) { // 按F9中途结束
-                clearPressingState();
-                return;
-            }
-            curTime = Now() - start;
-            while (i < inputNum && curTime >= inputTime[i]) {
-                if (inputKey[i] <= 0) { // 鼠标移动
-                    mouseMove(i);
-                } else if (inputType[i] == 0) {
-                    pressDown(inputKey[i]);
-                } else if (inputType[i] == 2) {
-                    pressUp(inputKey[i]);
-                }
-                i++;
-            }
-            syncImitateChange();
-            Sleep(SLEEP_DURATION);
-        }
+    int flag = 0;
+    if (pressing(VK_NUMPAD0)) { // 小键盘0 登录
+        loadFile("log_on.txt", TXT_DIR);
+        flag = 1;
+    }
+    if (pressing('H')) { // 领每日
+        loadFile("daliy_tasks.txt", TXT_DIR);
+        flag = 1;
+    }
+    if (flag) {
+        syncEvent();
+        pause({VK_F6, VK_F4});
     }
 }
 void init() {
     loadAllKeys();
-    FILE* fp;
-    if ((fp = findFile("event.txt", "D:/0_vscode_cpp/Script/GameScript/YuanShen/input/")) == NULL) {
-        cout << "wrong filename\n";
-        return;
-    }
-    cout << "press F6 to start and press F7 to pause or F4 to stop\n";
-    fscanf(fp, "%d", &inputNum);
-    for (int i = 0; i < inputNum; i++) {
-        fscanf(fp, "%d%d%d", &inputTime[i], &inputKey[i], &inputType[i]);
-    }
-    fscanf(fp, "%d", &syncCnt);
-    for (int i = 0; i < syncCnt; i++) {
-        fscanf(fp, "%d", &syncImitate[i]);
-    }
-    fclose(fp);
 }
 int main() {
     init();
-    while (!pressing(VK_F6)) {
-        Sleep(SLEEP_DURATION);
-        if (pressing(VK_F4)) {
-            return 0;
-        }
-    }
+    pause({VK_F6, VK_F4});
     while (!pressing(VK_F4)) {
-        if (pauseEvent() == 0) {
-            return 0;
-        }
+        pauseEvent();
         pressKey('F');
         if (pressing('N')) {
             pressDown('W');
