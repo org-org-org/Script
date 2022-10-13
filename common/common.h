@@ -65,8 +65,8 @@ void pressUp(int key) {
     }
 }
 void clearPressingState() {
-    for (auto v : vKeys) {
-        pressUp(v);
+    for (int i = 3; i < vKeys.size(); i++) {
+        pressUp(vKeys[i]);
     }
 }
 int imitateChange() {
