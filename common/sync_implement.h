@@ -33,6 +33,7 @@ void loadFile(string fileName, string dir) {
     fclose(fp);
 }
 void syncEvent() {
+    clearPressingState();
     start = Now();
     int i = 0;
     while (i < inputNum) {

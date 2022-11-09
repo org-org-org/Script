@@ -15,7 +15,7 @@ void selfEvent() {
         flag = 1;
     }
     if (pressing('H')) { // 领每日
-        loadFile("daliy_tasks.txt", TXT_DIR);
+        loadFile("daily_task.txt", TXT_DIR);
         flag = 1;
     }
     if (flag) {
