@@ -87,9 +87,9 @@ void initLoopImplement() {
 }
 void pressKey(BYTE vKey) {
     static char cnt[256] = {0};
-    if (cnt[vKey] == 4) {
+    if (cnt[vKey] == 8) {
         pressDown(vKey);
-    } else if (cnt[vKey] == 8) {
+    } else if (cnt[vKey] == 16) {
         pressUp(vKey);
         cnt[vKey] = 0;
     }

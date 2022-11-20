@@ -45,11 +45,11 @@ int main() {
     }
     while (!pressing(VK_F4)) {
         pressKey('J');
-        pressKey('U');
-        if (pressing('N')) {
-            pressDown('J');
-            Sleep(100);
-        }
+        // pressKey('U');
+        // if (pressing('N')) {
+        //     pressDown('J');
+        //     Sleep(100);
+        // }
         pauseEvent();
         Sleep(SLEEP_DURATION);
     }
