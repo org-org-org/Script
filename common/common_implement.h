@@ -46,6 +46,43 @@ FILE* findFile(string fileName, string prefix = LOAD_DIR) {
     closedir(dir);
     return NULL;
 }
+void getAllSimilarFile(vector<string>& files, string searchName, string prefix = LOAD_DIR) {
+    DIR* dir = opendir(prefix.c_str());
+    struct dirent* entry;
+    while (entry = readdir(dir)) {
+        string curName = entry->d_name;
+        if (curName.find(searchName) != curName.npos) {
+            files.push_back(curName);
+        } else if (curName.find('.') == curName.npos) { // 是文件夹
+            getAllSimilarFile(files, searchName, prefix + curName + '/');
+        }
+    }
+    closedir(dir);
+}
+FILE* searchFile(string fileName) {
+    FILE* fp;
+    if ((fp = findFile(fileName)) != NULL) {
+        return fp;
+    }
+    vector<string>files;
+    getAllSimilarFile(files, fileName);
+    while (files.empty()) {
+        cout << "wrong filename, please input again\n";
+        cin >> fileName;
+        getAllSimilarFile(files, fileName);
+    }
+    cout << "input the number to choose file:\n";
+    for (int i = 0; i < files.size(); i++) {
+        cout << i + 1 << ": " << files[i] << endl;
+    }
+    int id;
+    cin >> id;
+    while (id <= 0 || id > files.size()) {
+        cout << "wrong id, please input again\n";
+        cin >> id;
+    }
+    return findFile(files[id - 1]);
+}
 void initImplement() {
     loadAllKeys();
     cout << "input a filename to read\n";
