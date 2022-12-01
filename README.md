@@ -16,8 +16,8 @@
 6. 理论上不可能封号，但要真封了。。。概不负责（）
 ## 4. 关于opHelper
 1. 开机自启脚本：把opHelper.vbs移动到C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp路径下，
-在D盘新建0_vscode_cpp文件夹，把整个Script文件夹移动到0_vscode_cpp文件夹下  
-（不建议把脚本中第二行的dir路径把改为你自己的路径，否则因为启动程序的相对路径问题可能导致读取不到input文件夹的文件）  
+把opHelper.vbs中第二行的dir路径改为你自己opHelper.exe所在的文件目录
+（不改也行，那就按默认的dir路径，在D盘新建0_vscode_cpp文件夹，把整个Script文件夹移动到0_vscode_cpp文件夹下）  
 之后每次开机会自启该脚本，每20秒检测当前是否打开原神，如打开，后台启动opHelper程序。如关闭原神，则关闭程序。  
 该脚本可能会被360等杀毒软件判为无用的开机启动程序，别给误删了（）
 1. 设置第一步后相当于每次打开原神会自启opHelper，按F6开启功能，按F7可暂停执行，按F6重新开启。以下功能皆为按下F6后生效

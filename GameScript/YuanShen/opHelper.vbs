@@ -5,7 +5,7 @@ do
     set op = obj.execquery("select ProcessID from win32_process where name='YuanShen.exe'")
     set helper = obj.execquery("select ProcessID from win32_process where name='opHelper.exe'")
     if op.Count > 0 and helper.Count = 0 then 
-        CreateObject("wscript.shell").run dir + "opHelper.exe", 0
+        CreateObject("wscript.shell").run dir + "opHelper.exe" + " " + dir, 0
     elseif op.Count = 0 then 
         for each i in helper
             i.terminate()

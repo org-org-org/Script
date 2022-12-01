@@ -1,5 +1,5 @@
 #include "../../common/sync_implement.h"
-const string TXT_DIR = "D:/0_vscode_cpp/Script/GameScript/YuanShen/input/";
+string TXT_DIR = "D:/0_vscode_cpp/Script/GameScript/YuanShen/input/";
 void pauseEvent() {
     if (pressing(VK_F7) || pressing(VK_MENU) && pressing(VK_TAB)) {
         pause({VK_F6, VK_F4});
@@ -26,8 +26,11 @@ void selfEvent() {
 void init() {
     loadAllKeys();
 }
-int main() {
+int main(int argc, char* argv[]) {
     init();
+    if (argc == 2) {
+        TXT_DIR = argv[1];
+    }
     pause({VK_F6, VK_F4});
     while (!pressing(VK_F4)) {
         pauseEvent();
