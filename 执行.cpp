@@ -1,6 +1,7 @@
 #include "./common/common_implement.h"
 int main() {
-    initImplement();
+    loadAllKeys();
+    init();
     int i = 0;
     while (i < inputNum) {
         if (pressing(endKey)) { // 按F9中途结束

@@ -6,8 +6,8 @@ void init() {
     initRecord();
 }
 void quickHitEsc() {
-    if (pressEsc && curTime > 3200) {
-        while (curTime < 5400) {
+    if (pressEsc && curTime > 4000) {
+        while (curTime < 6000) {
             keybd_event(VK_ESCAPE, 0, 0, 0);
             pressDownEvent(VK_ESCAPE);
             Sleep(SLEEP_DURATION);

@@ -1,20 +1,6 @@
 #include "../../common/common_implement.h"
-void init() {
-    loadAllKeys();
-    cout << "input a filename to read\n";
-    cin >> fileName;
-    FILE* fp = searchFile(fileName);
-    cout << "then press F8 to implement and press F9 to stop\n";
-    while (~fscanf(fp, "%d%d%d", &inputTime[inputNum], &inputKey[inputNum], &inputType[inputNum])) {
-        inputNum++;
-    }
-    fclose(fp);
-    while (!pressing(beginKey)) { // 按F8开始执行
-        Sleep(SLEEP_DURATION);
-    }
-    start = Now();
-}
 int main() {
+    loadAllKeys();
     init();
     int i = 0;
     while (i < inputNum) {

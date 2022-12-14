@@ -5,7 +5,7 @@ void pauseEvent() {
         pause({VK_F6, VK_F4});
     }
     if (pressing('M') || pressing('B') || pressing('C') || pressing('L') || pressing(VK_RETURN)) {
-        pause({VK_ESCAPE, VK_F6, VK_F4});
+        pause({VK_F6, VK_F4});
     }
 }
 void selfEvent() {
