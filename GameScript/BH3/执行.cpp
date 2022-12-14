@@ -1,5 +1,7 @@
 #include "../../common/common_implement.h"
+#include "common/BH3_common.cpp"
 int main() {
+    whetherReplace();
     loadAllKeys();
     init();
     int i = 0;

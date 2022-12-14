@@ -1,7 +1,9 @@
 #include "../../common/common_implement.h"
+#include "common/BH3_common.cpp"
 int main() {
+    whetherReplace();
     loadAllKeys();
-    while (!pressing(VK_F4)) {
+    while (1) {
         init();
         int i = 0;
         while (i < inputNum) {

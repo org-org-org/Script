@@ -1,7 +1,7 @@
 #include "common.h"
+BYTE replaceMap[256] = {0};
 int ROUND_DURATION = 0;
 int ROUND = 1;
-char replaceMap[256] = {0};
 void press(int key) {
     pressDown(key);
     Sleep(8 * SLEEP_DURATION);
@@ -23,6 +23,16 @@ int waitToStart(int T = 1) {
         }
     }
     return 1;
+}
+void pressKey(BYTE vKey) {
+    static BYTE cnt[256] = {0};
+    if (cnt[vKey] == 6) {
+        pressDown(vKey);
+    } else if (cnt[vKey] == 12) {
+        pressUp(vKey);
+        cnt[vKey] = 0;
+    }
+    cnt[vKey]++;
 }
 FILE* findFile(string fileName, string prefix = LOAD_DIR) {
     if (fileName.find(".txt") == fileName.npos) {
@@ -84,35 +94,7 @@ FILE* searchFile(string fileName) {
     }
     return findFile(files[id - 1]);
 }
-void pressKey(BYTE vKey) {
-    static char cnt[256] = {0};
-    if (cnt[vKey] == 6) {
-        pressDown(vKey);
-    } else if (cnt[vKey] == 12) {
-        pressUp(vKey);
-        cnt[vKey] = 0;
-    }
-    cnt[vKey]++;
-}
-void whetherReplace() {
-    static int first = 1, use = 0;
-    if (first) {
-        first = 0;
-        cout << "whether to use replace key?\n";
-        cout << "input 0 or 1, 0 means no and 1 means yes\n";
-        cin >> use;
-        if (use) {
-            replaceMap['J'] = VK_NUMPAD1;
-            replaceMap['I'] = VK_NUMPAD5;
-            replaceMap['O'] = VK_NUMPAD6;
-            replaceMap['U'] = VK_NUMPAD4;
-            replaceMap['M'] = VK_NUMPAD0;
-            replaceMap['K'] = VK_NUMPAD2;
-        }
-    }
-}
 void readInputFile() {
-    whetherReplace();
     cout << "input a filename to read\n";
     cin >> fileName;
     FILE* fp = searchFile(fileName);
@@ -139,6 +121,5 @@ void initLoopImplement() {
     cin >> ROUND_DURATION;
     cout << "input the loop times\n";
     cin >> ROUND;
-    loadAllKeys();
     readInputFile();
 }

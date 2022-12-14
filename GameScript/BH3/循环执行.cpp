@@ -1,5 +1,8 @@
 #include "../../common/common_implement.h"
+#include "common/BH3_common.cpp"
 int main() {
+    whetherReplace();
+    loadAllKeys();
     initLoopImplement();
     for (int T = 0; T < ROUND; T++) {
         if (waitToStart(T) == 0) {
