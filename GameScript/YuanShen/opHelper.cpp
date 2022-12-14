@@ -1,12 +1,8 @@
 #include "../../common/sync_implement.h"
 string TXT_DIR = "D:/0_vscode_cpp/Script/GameScript/YuanShen/input/";
 void pauseEvent() {
-    if (pressing(VK_F7) || pressing(VK_MENU) && pressing(VK_TAB)) {
-        pause({VK_F6, VK_F4});
-    }
-    if (pressing('M') || pressing('B') || pressing('C') || pressing('L') || pressing(VK_RETURN)) {
-        pause({VK_F6, VK_F4});
-    }
+    vector<BYTE>pauseKeys = {VK_F7, VK_MENU, VK_TAB, 'M', 'B', 'C', 'L', VK_RETURN};
+    checkPause(pauseKeys, {VK_F6, VK_F4});
 }
 void selfEvent() {
     int flag = 0;
@@ -23,11 +19,8 @@ void selfEvent() {
         pause({VK_F6, VK_F4});
     }
 }
-void init() {
-    loadAllKeys();
-}
 int main(int argc, char* argv[]) {
-    init();
+    loadAllKeys();
     if (argc == 2) {
         TXT_DIR = argv[1];
     }

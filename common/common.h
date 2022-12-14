@@ -17,7 +17,7 @@ string fileName;
 BYTE beginKey = VK_F8, endKey = VK_F9, pauseKey = VK_F7;
 vector<BYTE>vKeys;
 bool pre[256] = {0};
-bool pressing(int vKey) {
+bool pressing(BYTE vKey) {
     return GetAsyncKeyState(vKey) >> 15;
 }
 time_t Now() { // 获取当前时间戳，毫秒级
@@ -87,7 +87,7 @@ int imitateChange() {
     }
     return flag;
 }
-void pause(vector<int>endKeys) {
+void pause(vector<BYTE>endKeys) {
     clearPressingState();
     while (1) {
         Sleep(SLEEP_DURATION);
@@ -95,6 +95,14 @@ void pause(vector<int>endKeys) {
             if (pressing(endKeys[i])) {
                 return;
             }
+        }
+    }
+}
+void checkPause(vector<BYTE>pauseKeys, vector<BYTE>endKeys) {
+    for (int i = 0; i < pauseKeys.size(); i++) {
+        if (pressing(pauseKeys[i])) {
+            pause(endKeys);
+            return;
         }
     }
 }
