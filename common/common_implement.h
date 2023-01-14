@@ -116,6 +116,7 @@ void init() {
     start = Now();
 }
 void initLoopImplement() {
+    loadAllKeys();
     cout << "whether start a new round manually or sleep?\n";
     cout << "input 0 or N, 0 means manually and N means sleep N second\n";
     cin >> ROUND_DURATION;
