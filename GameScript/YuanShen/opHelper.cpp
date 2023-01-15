@@ -5,18 +5,14 @@ void pauseEvent() {
     checkPause(pauseKeys, {VK_F6, VK_F4});
 }
 void selfEvent() {
-    int flag = 0;
-    if (pressing(VK_NUMPAD0)) { // 小键盘0 登录
-        loadFile("log_on.txt", TXT_DIR);
-        flag = 1;
-    }
-    if (pressing('H')) { // 领每日
-        loadFile("daily_task.txt", TXT_DIR);
-        flag = 1;
-    }
-    if (flag) {
-        syncEvent();
-        pause({VK_F6, VK_F4});
+    for (int i = 0; i <= 9; i++) { // 小键盘0到9的自定义事件
+        if (pressing(VK_NUMPAD0 + i)) {
+            string fileName = to_string(i) + ".txt";
+            loadFile(fileName, TXT_DIR);
+            syncEvent();
+            pause({VK_F6, VK_F4});
+            return;
+        }
     }
 }
 int main(int argc, char* argv[]) {

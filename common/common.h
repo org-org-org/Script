@@ -20,6 +20,9 @@ bool pre[256] = {0};
 bool pressing(BYTE vKey) {
     return GetAsyncKeyState(vKey) >> 15;
 }
+bool pressed(BYTE vKey) {
+    return GetAsyncKeyState(vKey);
+}
 time_t Now() { // 获取当前时间戳，毫秒级
     time_t second;
     time(&second);
@@ -90,9 +93,9 @@ int imitateChange() {
 void pause(vector<BYTE>endKeys) {
     clearPressingState();
     while (1) {
-        Sleep(SLEEP_DURATION);
+        Sleep(16 * SLEEP_DURATION);
         for (int i = 0; i < endKeys.size(); i++) {
-            if (pressing(endKeys[i])) {
+            if (pressed(endKeys[i])) {
                 return;
             }
         }
