@@ -1,8 +1,16 @@
 #include "../../common/sync_implement.h"
 string TXT_DIR = "D:/0_vscode_cpp/Script/GameScript/YuanShen/input/";
-void pauseEvent() {
-    vector<BYTE>pauseKeys = {VK_F7, VK_MENU, VK_TAB, 'M', 'B', 'C', 'L', VK_RETURN};
-    checkPause(pauseKeys, {VK_F6, VK_F4});
+vector<BYTE>endKeys{VK_F6};
+vector<BYTE>pauseKeys = {VK_F7, VK_MENU, VK_TAB, 'M', 'B', 'C', 'L', VK_RETURN};
+void pressKey(BYTE vKey) {
+    static BYTE cnt[256] = {0};
+    if (cnt[vKey] == 6) {
+        pressDown(vKey);
+    } else if (cnt[vKey] == 12) {
+        pressUp(vKey);
+        cnt[vKey] = 0;
+    }
+    cnt[vKey]++;
 }
 void selfEvent() {
     for (int i = 0; i <= 9; i++) { // 小键盘0到9的自定义事件
@@ -10,7 +18,6 @@ void selfEvent() {
             string fileName = to_string(i) + ".txt";
             loadFile(fileName, TXT_DIR);
             syncEvent();
-            pause({VK_F6, VK_F4});
             return;
         }
     }
@@ -20,12 +27,17 @@ int main(int argc, char* argv[]) {
     if (argc == 2) {
         TXT_DIR = argv[1];
     }
-    pause({VK_F6, VK_F4});
-    while (!pressing(VK_F4)) {
-        pauseEvent();
-        pressKey('F');
-        if (pressing('N')) {
+    INT8 hitF = 0;
+    while (1) {
+        if (pressing(VK_ADD)) { // 小键盘+
+            hitF = 1;
+        } else if (pressing(VK_SUBTRACT)) { // 小键盘-
+            hitF = 0;
+        } else if (pressing(VK_DECIMAL)) { // 小键盘.
             pressDown('W');
+        }
+        if (hitF) {
+            pressKey('F');
         }
         selfEvent();
         Sleep(SLEEP_DURATION);

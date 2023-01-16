@@ -2,12 +2,6 @@
 BYTE replaceMap[256] = {0};
 int ROUND_DURATION = 0;
 int ROUND = 1;
-void press(int key) {
-    pressDown(key);
-    Sleep(8 * SLEEP_DURATION);
-    pressUp(key);
-    Sleep(8 * SLEEP_DURATION);
-}
 void mouseMove(int i) {
     SetCursorPos(-inputKey[i], -inputType[i]);
 }
@@ -23,16 +17,6 @@ int waitToStart(int T = 1) {
         }
     }
     return 1;
-}
-void pressKey(BYTE vKey) {
-    static BYTE cnt[256] = {0};
-    if (cnt[vKey] == 6) {
-        pressDown(vKey);
-    } else if (cnt[vKey] == 12) {
-        pressUp(vKey);
-        cnt[vKey] = 0;
-    }
-    cnt[vKey]++;
 }
 FILE* findFile(string fileName, string prefix = LOAD_DIR) {
     if (fileName.find(".txt") == fileName.npos) {
