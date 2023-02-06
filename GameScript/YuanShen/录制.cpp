@@ -11,7 +11,6 @@ void recordImitateChange() {
     } else if (pressing(VK_NEXT)) {
         mouse_event(MOUSEEVENTF_WHEEL, 0, 0, -MOUSE_SPEED, 0);
     }
-    curTime = Now() - start;
     if (imitateChange()) {
         syncImitate[syncCnt++] = curTime;
     }

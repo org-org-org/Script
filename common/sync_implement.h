@@ -9,7 +9,6 @@ void syncImitateChange() {
     } else if (pressing(VK_NEXT)) {
         mouse_event(MOUSEEVENTF_WHEEL, 0, 0, -MOUSE_SPEED, 0);
     }
-    curTime = Now() - start;
     if (curTime >= syncImitate[syncFlag]) {
         syncFlag++;
         imitateChange();
@@ -35,6 +34,7 @@ void loadFile(string fileName, string dir) {
 void syncEvent() {
     clearPressingState();
     start = Now();
+    syncFlag = 0;
     int i = 0;
     while (i < inputNum) {
         if (pressing(endKey)) { // 按F9中途结束

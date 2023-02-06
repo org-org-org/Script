@@ -7,7 +7,7 @@
 #define INF 0x3f3f3f3f
 using namespace std;
 const int N = 1 << 16;
-const int MOUSE_SPEED = 32;
+const int MOUSE_SPEED = 64;
 const int SLEEP_DURATION = 10;
 const string LOAD_DIR = "./input/";
 int inputTime[N] = {0}, inputKey[N] = {0}, inputType[N] = {0};
