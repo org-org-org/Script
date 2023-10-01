@@ -1,1 +1,1 @@
-0 # whether to use replace key
+1 # whether to use replace key

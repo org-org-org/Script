@@ -1,4 +1,4 @@
-SLEEP_DURATION = 1000 * 20
+SLEEP_DURATION = 1000 * 18
 dir = "D:\0_vscode_cpp\Script\GameScript\XingTie\"
 do
     set obj = getobject("winmgmts:\\.\root\cimv2")
