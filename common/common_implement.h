@@ -108,7 +108,7 @@ void initLoopImplement() {
     cin >> ROUND;
     readInputFile();
 }
-void pressKey(int key, int afterSleepDuration = SLEEP_DURATION) {
+void pressKey(int key, int afterSleepDuration = 0) {
     pressDown(key);
     Sleep(SLEEP_DURATION);
     pressUp(key);

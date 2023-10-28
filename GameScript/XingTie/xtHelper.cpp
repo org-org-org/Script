@@ -29,15 +29,25 @@ int main(int argc, char* argv[]) {
     }
     INT8 hitF = 0;
     while (1) {
-        if (pressing(VK_ADD)) { // 小键盘+
-            hitF = 1;
-        } else if (pressing(VK_SUBTRACT)) { // 小键盘-
-            hitF = 0;
-        } else if (pressing(VK_DECIMAL)) { // 小键盘.
+        if (pressing(VK_DECIMAL)) { // 小键盘.
             pressDown('W');
         }
+        if (pressing(192)) {
+            if (pre[192] == 0) { // 之前没按着现在按着，按下
+                pre[192] = 1;
+            }
+        } else {
+            if (pre[192] == 1) { // 之前按着现在没按着，松开
+                pre[192] = 0;
+                hitF = !hitF;
+            }
+        }
         if (hitF) {
-            pressKey('F');
+            hitF++;
+            if (hitF >= 18) {
+                pressKey(VK_SPACE);
+                hitF = 1;
+            }
         }
         selfEvent();
         Sleep(SLEEP_DURATION);
