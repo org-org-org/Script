@@ -4,6 +4,8 @@
 #include <Windows.h>
 using namespace std;
 
+string GameScriptDIR = "D:/0_vscode_cpp/Script/GameScript/";
+
 vector<string> splitN(string str, char sep, int n = -1) {
     vector<string>res;
     int pre = 0, i = 0;
@@ -41,25 +43,30 @@ map<string, string> getCurProcess() {
     return m;
 }
 
-void startProcess(string file) {
-    ShellExecute(NULL, LPCTSTR("open"), LPCTSTR(file.c_str()), LPCTSTR(""), NULL, SW_HIDE);
+void startProcess(string file, string dir) {
+    file = GameScriptDIR + dir + "/" + file;
+    dir = GameScriptDIR + dir + "/input/";
+    ShellExecute(NULL, LPCTSTR("open"), LPCTSTR(file.c_str()), LPCTSTR(dir.c_str()), NULL, SW_HIDE);
 }
 
 void killProcess(string pid) {
     system(("taskkill /F /PID " + pid).c_str());
 }
 
-int main() {
+int main(int argc, char* argv[]) {
+    if (argc == 2) {
+        GameScriptDIR = argv[1];
+    }
     while (1) {
         map<string, string>m = getCurProcess();
         string yuanShen = m["YuanShen.exe"], op = m["opHelper.exe"];
         string starRail = m["StarRail.exe"], xt = m["xtHelper.exe"];
         if (yuanShen != "" && op == "") { // 启动op
-            startProcess("./YuanShen/opHelper.exe");
+            startProcess("opHelper.exe", "YuanShen");
         } else if (op != "" && yuanShen == "") { // 关op
             killProcess(op);
         } else if (starRail != "" && xt == "") { // 开xt
-            startProcess("./XingTie/xtHelper.exe");
+            startProcess("xtHelper.exe", "XingTie");
         } else if (xt != "" && starRail == "") { // 关xt
             killProcess(xt);
         }
