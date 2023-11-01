@@ -42,7 +42,7 @@ map<string, string> getCurProcess() {
 }
 
 void startProcess(string file, string dir) {
-    cout << ShellExecute(NULL, LPCTSTR("open"), LPCTSTR(file.c_str()), LPCTSTR(dir.c_str()), LPCTSTR(dir.c_str()), 0);
+    cout << ShellExecute(NULL, LPCTSTR("open"), LPCTSTR(file.c_str()), NULL, LPCTSTR(dir.c_str()), 0);
 }
 
 void killProcess(string pid) {

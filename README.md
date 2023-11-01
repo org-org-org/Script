@@ -13,13 +13,12 @@
 4. 在崩坏3中无法保证每次进入游戏的时间相同，所以可设置开始录制后快速敲击Esc暂停，默认6秒后停止。
 5. 开始录制和停止敲击Esc时会有响铃提示。
 ## 4、关于gameScript（原神、星铁自启脚本）
-0. 开机自启脚本：把gameScript.vbs中的dir路径改为你自己gameScript.exe所在的文件目录。不改也行，那就按默认的dir路径，在D盘新建0_vscode_cpp文件夹，把整个Script文件夹移动到0_vscode_cpp文件夹下。  
-1. 把GameScript文件夹下的gameScript.vbs移动到C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp路径下。  
+1. 开机自启脚本：右键GameScript文件夹下的gameScript.vbs，选择创建快捷方式，把快捷方式移动到C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp路径下。  
 注意gameScript.exe, opHelper.exe, xtHelper.exe都应该是以管理员运行。  
 之后每次开机会自启该脚本，每15秒检测当前是否打开原神或星铁，如打开，后台启动对应脚本程序。如关闭游戏，则关闭程序。  
 该脚本可能会被360等杀毒软件判为无用的开机启动程序，别给误删了。  
 第一次使用可以不用重启电脑，直接双击执行一次vbs脚本即可在后台运行。
-2. 完成上一步后相当于每次打开原神会自启opHelper，打开星铁会自启xtHelper。
+2. 完成后相当于每次打开原神会自启opHelper，打开星铁会自启xtHelper。
 3. 按~键会自动按F拾取材料或对话，再按一次关闭该功能。星铁为自动按空格
 4. 按小键盘.可自动往前走，主要用于需要长时间飞行的时候解放双手，再按一次W停下。
 5. 录制领每日、探索派遣、跑到合成台的操作，文件名保存为0.txt，下次按小键盘0可一键执行。
