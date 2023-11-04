@@ -1,4 +1,4 @@
-#include "common.h"
+#include "common.cpp"
 BYTE replaceMap[256] = {0};
 int ROUND_DURATION = 0;
 int ROUND = 1;

@@ -1,4 +1,4 @@
-#include "common.h"
+#include "common.cpp"
 POINT point, prePoint;
 void pressDownEvent(int vKey) {
     pre[vKey] = 1;

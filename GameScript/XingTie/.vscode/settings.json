@@ -81,6 +81,7 @@
         "new": "cpp",
         "scoped_allocator": "cpp",
         "typeindex": "cpp",
-        "*.rh": "cpp"
+        "*.rh": "cpp",
+        "sync_implement": "cpp"
     }
 }

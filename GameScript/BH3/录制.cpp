@@ -1,4 +1,4 @@
-#include "../../common/common_record.h"
+#include "../../common/common_record.cpp"
 int pressEsc = 0;
 void init() {
     cout << "whether to quick hit Esc to pause game at first? [0/1]\n";

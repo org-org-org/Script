@@ -1,4 +1,4 @@
-#include "./common/common_record.h"
+#include "./common/common_record.cpp"
 int main() {
     initRecord();
     while (!pressing(endKey)) { // 按F9停止录制

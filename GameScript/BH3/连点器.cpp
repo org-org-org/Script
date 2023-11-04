@@ -1,4 +1,4 @@
-#include "../../common/common_implement.h"
+#include "../../common/common_implement.cpp"
 #include <unordered_map>
 unordered_map<string, int>m;
 int key;

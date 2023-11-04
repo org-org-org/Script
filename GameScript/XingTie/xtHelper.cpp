@@ -1,4 +1,4 @@
-#include "../../common/sync_implement.h"
+#include "../../common/sync_implement.cpp"
 void selfEvent() {
     for (int i = 0; i <= 9; i++) { // 小键盘0到9的自定义事件
         if (pressing(VK_NUMPAD0 + i)) {
@@ -28,7 +28,7 @@ int main() {
         }
         if (hitF) {
             hitF++;
-            if (hitF >= 18) {
+            if (hitF > 9) {
                 pressKey(VK_SPACE);
                 hitF = 1;
             }

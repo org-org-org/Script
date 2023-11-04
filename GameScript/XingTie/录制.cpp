@@ -1,4 +1,4 @@
-#include "../../common/common_record.h"
+#include "../../common/common_record.cpp"
 int syncImitate[N] = {0};
 int syncCnt = 0;
 void init() {

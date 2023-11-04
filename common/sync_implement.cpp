@@ -1,4 +1,4 @@
-#include "common_implement.h"
+#include "common_implement.cpp"
 int syncImitate[N] = {0};
 int syncCnt = 0;
 int syncFlag = 0;

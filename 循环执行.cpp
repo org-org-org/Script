@@ -1,4 +1,4 @@
-#include "./common/common_implement.h"
+#include "./common/common_implement.cpp"
 int main() {
     initLoopImplement();
     for (int T = 0; T < ROUND; T++) {
