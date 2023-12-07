@@ -14,13 +14,25 @@ void syncImitateChange() {
         imitateChange();
     }
 }
-void loadFile(string fileName, string dir) {
+void readSyncInputFile() {
+    FILE* fp = searchFile();
+    cout << "then press F8 to implement and press F9 to stop\n";
+    fscanf(fp, "%d", &inputNum);
+    for (int i = 0; i < inputNum; i++) {
+        fscanf(fp, "%d%d%d", &inputTime[i], &inputKey[i], &inputType[i]);
+    }
+    fscanf(fp, "%d", &syncCnt);
+    for (int i = 0; i < syncCnt; i++) {
+        fscanf(fp, "%d", &syncImitate[i]);
+    }
+    fclose(fp);
+}
+void loadFile(string fileName) {
     FILE* fp;
-    if ((fp = findFile(fileName, dir)) == NULL) {
+    if ((fp = findFile(fileName)) == NULL) {
         cout << "wrong filename\n";
         return;
     }
-    cout << "press F6 to start and press F7 to pause or F4 to stop\n";
     fscanf(fp, "%d", &inputNum);
     for (int i = 0; i < inputNum; i++) {
         fscanf(fp, "%d%d%d", &inputTime[i], &inputKey[i], &inputType[i]);
@@ -54,5 +66,15 @@ void syncEvent() {
         }
         syncImitateChange();
         Sleep(SLEEP_DURATION);
+    }
+}
+void selfEvent() {
+    for (int i = 0; i <= 9; i++) { // 小键盘0到9的自定义事件
+        if (pressing(VK_NUMPAD0 + i)) {
+            string fileName = to_string(i) + ".txt";
+            loadFile(fileName);
+            syncEvent();
+            return;
+        }
     }
 }

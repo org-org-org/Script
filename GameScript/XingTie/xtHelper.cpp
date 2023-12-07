@@ -1,14 +1,4 @@
 #include "../../common/sync_implement.cpp"
-void selfEvent() {
-    for (int i = 0; i <= 9; i++) { // 小键盘0到9的自定义事件
-        if (pressing(VK_NUMPAD0 + i)) {
-            string fileName = to_string(i) + ".txt";
-            loadFile(fileName, "input/");
-            syncEvent();
-            return;
-        }
-    }
-}
 int main() {
     loadAllKeys();
     INT8 hitF = 0;

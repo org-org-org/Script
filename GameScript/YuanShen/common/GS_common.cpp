@@ -1,18 +1,3 @@
-void readSyncInputFile() {
-    cout << "input a filename to read\n";
-    cin >> fileName;
-    FILE* fp = searchFile(fileName);
-    cout << "then press F8 to implement and press F9 to stop\n";
-    fscanf(fp, "%d", &inputNum);
-    for (int i = 0; i < inputNum; i++) {
-        fscanf(fp, "%d%d%d", &inputTime[i], &inputKey[i], &inputType[i]);
-    }
-    fscanf(fp, "%d", &syncCnt);
-    for (int i = 0; i < syncCnt; i++) {
-        fscanf(fp, "%d", &syncImitate[i]);
-    }
-    fclose(fp);
-}
 void syncInit() {
     loadAllKeys();
     readSyncInputFile();

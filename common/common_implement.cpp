@@ -33,13 +33,12 @@ FILE* findFile(string fileName, string prefix = LOAD_DIR) {
         if (curName.find('.') == curName.npos) { // 是文件夹
             fp = findFile(fileName, prefix + curName + '/');
             if (fp != NULL) {
-                closedir(dir);
-                return fp;
+                break;
             }
         }
     }
     closedir(dir);
-    return NULL;
+    return fp;
 }
 void getAllSimilarFile(vector<string>& files, string searchName, string prefix = LOAD_DIR) {
     DIR* dir = opendir(prefix.c_str());
@@ -54,7 +53,9 @@ void getAllSimilarFile(vector<string>& files, string searchName, string prefix =
     }
     closedir(dir);
 }
-FILE* searchFile(string fileName) {
+FILE* searchFile() {
+    cout << "input a filename to read\n";
+    cin >> fileName;
     FILE* fp;
     if ((fp = findFile(fileName)) != NULL) {
         return fp;
@@ -79,9 +80,7 @@ FILE* searchFile(string fileName) {
     return findFile(files[id - 1]);
 }
 void readInputFile() {
-    cout << "input a filename to read\n";
-    cin >> fileName;
-    FILE* fp = searchFile(fileName);
+    FILE* fp = searchFile();
     cout << "then press F8 to implement and press F9 to stop\n";
     inputNum = 0;
     while (~fscanf(fp, "%d%d%d", &inputTime[inputNum], &inputKey[inputNum], &inputType[inputNum])) {
