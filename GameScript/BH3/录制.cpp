@@ -6,13 +6,12 @@ void init() {
     initRecord();
 }
 void quickHitEsc() {
-    if (pressEsc && curTime > 4000) {
-        while (curTime < 6000) {
-            keybd_event(VK_ESCAPE, 0, 0, 0);
+    if (pressEsc && curTime > 6000) {
+        while (curTime < 8000) {
+            pressDown(VK_ESCAPE);
             pressDownEvent(VK_ESCAPE);
             Sleep(SLEEP_DURATION);
-            curTime = Now() - start;
-            keybd_event(VK_ESCAPE, 0, 2, 0);
+            pressUp(VK_ESCAPE);
             pressUpEvent(VK_ESCAPE);
             Sleep(SLEEP_DURATION);
             curTime = Now() - start;

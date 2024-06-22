@@ -3,6 +3,9 @@ int main() {
     loadAllKeys();
     INT8 hitF = 0;
     while (1) {
+        if (pressing(VK_XBUTTON1)) { // 鼠标侧键（后退）
+            mouse_event(MOUSEEVENTF_MOVE, -256, 0, 0, 0);
+        }
         if (pressing(VK_DECIMAL)) { // 小键盘.
             pressDown('W');
         }
