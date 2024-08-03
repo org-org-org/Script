@@ -47,20 +47,22 @@ void killProcess(string pName) {
 int exist(string pName) {
     return m[pName] != "";
 }
+void openOrClose(string gameName, string helperName, string helperDir) {
+    if (exist(gameName) && !exist(helperName)) { // 启动
+        startProcess(helperName, helperDir);
+    } else if (!exist(gameName) && exist(helperName)) { // 关
+        killProcess(helperName);
+    }
+}
 int main() {
     const string yuanShen = "YuanShen.exe", op = "opHelper.exe";
     const string starRail = "StarRail.exe", xt = "xtHelper.exe";
+    const string zenlessZoneZero = "ZenlessZoneZero.exe", zzz = "zzzHelper.exe";
     while (1) {
         getCurProcess();
-        if (exist(yuanShen) && !exist(op)) { // 启动op
-            startProcess(op, "./YuanShen/");
-        } else if (!exist(yuanShen) && exist(op)) { // 关op
-            killProcess(op);
-        } else if (exist(starRail) && !exist(xt)) { // 开xt
-            startProcess(xt, "./XingTie/");
-        } else if (!exist(starRail) && exist(xt)) { // 关xt
-            killProcess(xt);
-        }
+        openOrClose(yuanShen, op, "./YuanShen/");
+        openOrClose(starRail, xt, "./XingTie/");
+        openOrClose(zenlessZoneZero, zzz, "./ZZZ/");
         Sleep(15000);
     }
     return 0;
