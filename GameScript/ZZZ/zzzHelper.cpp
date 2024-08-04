@@ -2,16 +2,16 @@
 void event1() {
     pressKey(VK_SPACE);
 }
-void eventVK_XBUTTON1() { // 双反，切上一个人
-    pressKey(2);
-    pressKey(1);
-    pressKey('C');
+void eventVK_XBUTTON1() { // 双反，切下一个人
+    pressKey(2, 20);
+    pressKey(1, 20);
+    pressKey(VK_SPACE, 20);
     pressKey(1);
 }
-void eventVK_XBUTTON2() { // 双反，切下一个人
-    pressKey(2);
-    pressKey(1);
-    pressKey(VK_SPACE);
+void eventVK_XBUTTON2() { // 双反，切上一个人
+    pressKey(2, 20);
+    pressKey(1, 20);
+    pressKey('C', 20);
     pressKey(1);
 }
 int main() {
