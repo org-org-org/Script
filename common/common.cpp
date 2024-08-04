@@ -16,6 +16,7 @@ time_t start = 0, curTime = 0;
 string fileName;
 BYTE beginKey = VK_F8, endKey = VK_F9, pauseKey = VK_F7;
 vector<BYTE>vKeys;
+INT8 hit[256] = {0};
 bool pre[256] = {0};
 bool pressing(BYTE vKey) {
     return GetAsyncKeyState(vKey) >> 15;
@@ -50,7 +51,7 @@ void pressDown(int key) {
     } else if (key == 4) {
         mouse_event(MOUSEEVENTF_MIDDLEDOWN, 0, 0, 0, 0);
     } else {
-        keybd_event(key, 0, 0, 0);
+        keybd_event(key, MapVirtualKey(key, 0), 0, 0);
     }
 }
 void pressUp(int key) {
@@ -61,7 +62,7 @@ void pressUp(int key) {
     } else if (key == 4) {
         mouse_event(MOUSEEVENTF_MIDDLEUP, 0, 0, 0, 0);
     } else {
-        keybd_event(key, 0, 2, 0);
+        keybd_event(key, MapVirtualKey(key, 0), 2, 0);
     }
 }
 void clearPressingState() {

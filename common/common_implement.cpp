@@ -113,8 +113,7 @@ void pressKey(int key, int afterSleepDuration = 0) {
     pressUp(key);
     Sleep(afterSleepDuration);
 }
-void checkPressedKey(int vKey, void (*oper)(), int interval = 9) {
-    static INT8 hit[256] = {0};
+void checkPressedKeyUntilNextPressed(int vKey, void (*oper)(), int interval = 9) {
     if (pressing(vKey)) {
         if (pre[vKey] == 0) { // 之前没按着现在按着，按下
             pre[vKey] = 1;
@@ -134,14 +133,23 @@ void checkPressedKey(int vKey, void (*oper)(), int interval = 9) {
     }
 }
 void checkPressingKey(int vKey, void (*oper)(), int interval = 9) {
-    static INT8 duration[256] = {0};
     if (pressing(vKey)) {
-        duration[vKey]++;
-        if (duration[vKey] > interval) {
+        hit[vKey]++;
+        if (hit[vKey] > interval) {
             oper();
-            duration[vKey] = 1;
+            hit[vKey] = 1;
         }
     } else {
-        duration[vKey] = 0;
+        hit[vKey] = 0;
+    }
+}
+void checkPressingKeyOnce(int vKey, void (*oper)(), int interval = 9) {
+    if (pressing(vKey)) {
+        if (hit[vKey] == 0) {
+            oper();
+            hit[vKey] = 1;
+        }
+    } else {
+        hit[vKey] = 0;
     }
 }

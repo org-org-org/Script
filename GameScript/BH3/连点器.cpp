@@ -20,27 +20,14 @@ void initMap() {
     }
     key = m[str];
 }
+void event1() {
+    pressKey(key);
+}
 int main() {
     initMap();
     INT8 hitF = 0;
     while (1) {
-        if (pressing(192)) {
-            if (pre[192] == 0) { // 之前没按着现在按着，按下
-                pre[192] = 1;
-            }
-        } else {
-            if (pre[192] == 1) { // 之前按着现在没按着，松开
-                pre[192] = 0;
-                hitF = !hitF;
-            }
-        }
-        if (hitF) {
-            hitF++;
-            if (hitF > 9) {
-                pressKey(key);
-                hitF = 1;
-            }
-        }
+        checkPressedKeyUntilNextPressed(192, event1);
         Sleep(SLEEP_DURATION);
     }
     return 0;

@@ -2,7 +2,16 @@
 void event1() {
     pressKey(VK_SPACE);
 }
-void event2() {
+void eventVK_XBUTTON1() { // 双反，切上一个人
+    pressKey(2);
+    pressKey(1);
+    pressKey('C');
+    pressKey(1);
+}
+void eventVK_XBUTTON2() { // 双反，切下一个人
+    pressKey(2);
+    pressKey(1);
+    pressKey(VK_SPACE);
     pressKey(1);
 }
 int main() {
@@ -12,8 +21,9 @@ int main() {
         if (pressing(VK_DECIMAL)) { // 小键盘.
             pressDown('W');
         }
-        checkPressedKey(192, event1);
-        checkPressingKey(VK_XBUTTON1, event2); // 鼠标侧键（后退）
+        checkPressedKeyUntilNextPressed(192, event1);
+        checkPressingKeyOnce(VK_XBUTTON1, eventVK_XBUTTON1); // 鼠标侧键（后退）
+        checkPressingKeyOnce(VK_XBUTTON2, eventVK_XBUTTON2); // 鼠标侧键（前进）
         selfEvent();
         Sleep(SLEEP_DURATION);
     }
