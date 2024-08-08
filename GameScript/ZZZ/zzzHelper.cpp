@@ -24,7 +24,6 @@ void pauseEvent() {
 }
 int main() {
     loadAllKeys();
-    INT8 hitF = 0;
     while (1) {
         pauseEvent();
         if (pressing(VK_DECIMAL)) { // 小键盘.
