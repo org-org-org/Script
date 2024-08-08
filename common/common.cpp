@@ -44,25 +44,57 @@ void loadAllKeys() {
     }
 }
 void pressDown(int key) {
-    if (key == 1) {
-        mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0); // 鼠标左键按下 
-    } else if (key == 2) {
+    switch (key) {
+    case 1: {
+        mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0); // 鼠标左键按下
+        break;
+    }
+    case 2: {
         mouse_event(MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, 0);
-    } else if (key == 4) {
+        break;
+    }
+    case 4: {
         mouse_event(MOUSEEVENTF_MIDDLEDOWN, 0, 0, 0, 0);
-    } else {
+        break;
+    }
+    case 5: {
+        mouse_event(MOUSEEVENTF_XDOWN, 0, 0, XBUTTON1, 0);
+        break;
+    }
+    case 6: {
+        mouse_event(MOUSEEVENTF_XDOWN, 0, 0, XBUTTON2, 0);
+        break;
+    }
+    default: {
         keybd_event(key, MapVirtualKey(key, 0), 0, 0);
+    }
     }
 }
 void pressUp(int key) {
-    if (key == 1) {
+    switch (key) {
+    case 1: {
         mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-    } else if (key == 2) {
+        break;
+    }
+    case 2: {
         mouse_event(MOUSEEVENTF_RIGHTUP, 0, 0, 0, 0);
-    } else if (key == 4) {
+        break;
+    }
+    case 4: {
         mouse_event(MOUSEEVENTF_MIDDLEUP, 0, 0, 0, 0);
-    } else {
+        break;
+    }
+    case 5: {
+        mouse_event(MOUSEEVENTF_XUP, 0, 0, XBUTTON1, 0);
+        break;
+    }
+    case 6: {
+        mouse_event(MOUSEEVENTF_XUP, 0, 0, XBUTTON2, 0);
+        break;
+    }
+    default: {
         keybd_event(key, MapVirtualKey(key, 0), 2, 0);
+    }
     }
 }
 void clearPressingState() {

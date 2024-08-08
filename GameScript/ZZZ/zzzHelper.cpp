@@ -5,13 +5,13 @@ void event1() {
 void eventVK_XBUTTON1() { // 双反，切下一个人
     pressKey(2, 20);
     pressKey(1, 20);
-    pressKey(VK_SPACE, 20);
+    pressKey(VK_XBUTTON1, 20);  // 鼠标侧键（后退）
     pressKey(1);
 }
 void eventVK_XBUTTON2() { // 双反，切上一个人
     pressKey(2, 20);
     pressKey(1, 20);
-    pressKey('C', 20);
+    pressKey(VK_XBUTTON2, 20);  // 鼠标侧键（前进）
     pressKey(1);
 }
 int main() {
@@ -22,8 +22,8 @@ int main() {
             pressDown('W');
         }
         checkPressedKeyUntilNextPressed(192, event1);
-        checkPressingKeyOnce(VK_XBUTTON1, eventVK_XBUTTON1); // 鼠标侧键（后退）
-        checkPressingKeyOnce(VK_XBUTTON2, eventVK_XBUTTON2); // 鼠标侧键（前进）
+        checkPressingKeyOnce(VK_SPACE, eventVK_XBUTTON1);
+        checkPressingKeyOnce('C', eventVK_XBUTTON2);
         selfEvent();
         Sleep(SLEEP_DURATION);
     }
