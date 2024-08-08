@@ -1,6 +1,6 @@
 #include "../../common/sync_implement.cpp"
 void event1() {
-    pressKey(VK_SPACE);
+    pressKey(1);
 }
 void eventVK_XBUTTON1() { // 双反，切下一个人
     pressKey(2, 20);
@@ -14,10 +14,19 @@ void eventVK_XBUTTON2() { // 双反，切上一个人
     pressKey(VK_XBUTTON2, 20);  // 鼠标侧键（前进）
     pressKey(1);
 }
+void pauseEvent() {
+    if (pressing(pauseKey)) { // 按F7暂停
+        clearPressingState();
+        while (!pressing(beginKey)) { // 按F8重新开始
+            Sleep(SLEEP_DURATION);
+        }
+    }
+}
 int main() {
     loadAllKeys();
     INT8 hitF = 0;
     while (1) {
+        pauseEvent();
         if (pressing(VK_DECIMAL)) { // 小键盘.
             pressDown('W');
         }
