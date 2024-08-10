@@ -2,6 +2,9 @@
 void event1() {
     pressKey(1);
 }
+void event2() {
+    pressDown('W');
+}
 void eventVK_XBUTTON1() { // 双反，切下一个人
     pressKey(2, 20);
     pressKey(1, 20);
@@ -26,10 +29,8 @@ int main() {
     loadAllKeys();
     while (1) {
         pauseEvent();
-        if (pressing(VK_DECIMAL)) { // 小键盘.
-            pressDown('W');
-        }
         checkPressedKeyUntilNextPressed(192, event1);
+        checkPressingKeyOnce(VK_DECIMAL, event2); // 小键盘.
         checkPressingKeyOnce(VK_SPACE, eventVK_XBUTTON1);
         checkPressingKeyOnce('C', eventVK_XBUTTON2);
         selfEvent();
